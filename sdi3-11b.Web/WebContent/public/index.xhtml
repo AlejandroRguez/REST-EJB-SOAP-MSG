@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-public.xhtml">
+
+	<ui:define name="titulo">
+      #{msgs.tituloHead}
+    </ui:define>
+
+	<ui:define name="cuerpo">
+		<p:panelGrid id="Grid" columns="2" cellpadding="5">
+			#{msgs.usuario} 
+  			<h:panelGroup>
+				<p:inputText value="#{login.login}" required="true"
+					requiredMessage="#{msgs.formLogin_nombre_requiredMessage}"
+					id="username">
+				</p:inputText>
+			</h:panelGroup>
+  
+  			#{msgs.password} 
+  			<h:panelGroup>
+				<p:password value="#{login.password}" required="true"
+					requiredMessage="#{msgs.formLogin_password_requiredMessage}"
+					id="password">
+				</p:password>
+			</h:panelGroup>
+			<p:messages id="msjgral" showDetail="true" autoUpdate="true" closable="true"/>
+			<p:commandButton id="boton" value="#{msgs.botonLogin}"
+			action="#{login.verify}" update="@all" process="@form">
+			</p:commandButton>
+		
+		</p:panelGrid>
+		<p:panel header="#{msgs.opcionesPublico}">
+			<p:commandButton id="p_registrarse" value="#{msgs.botonRegistrarse}" immediate="true"
+				action="#{registro.initializeUser}" update="@all" process="@form">
+			</p:commandButton>
+			<p:commandButton id="p_disponibles" value="#{msgs.botonLVRegistrado}" immediate="true"
+				action="#{viajes.disponiblesPublico}" update="@all" process="@form">
+			</p:commandButton>
+		</p:panel>
+	</ui:define>
+
+	<ui:define name="pie">
+	</ui:define>
+
+</ui:composition>
+

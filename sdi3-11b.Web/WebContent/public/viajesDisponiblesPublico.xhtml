@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-public.xhtml">
+
+	<ui:define name="titulo">
+    #{msgs.tituloHead}
+  </ui:define>
+
+	<ui:define name="cuerpo">
+		<p:panel header="#{msgs.viajesDisponibles}">
+			<p:dataTable id="tablalistado" var="elem"
+				value="#{viajes.viajes}" border="1"
+				emptyMessage="#{msgs.noHayViajesDisponibles}"
+				rows="10" paginator="true"
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="5,10,15">
+				<p:column sortBy="#{elem.departure.city}">
+					<f:facet name="header">#{msgs.tablaOrigen1}</f:facet>#{elem.departure.city}</p:column>
+				<p:column sortBy="#{elem.departure.state}">
+					<f:facet name="header">#{msgs.tablaOrigen2}</f:facet>#{elem.departure.state}</p:column>
+				<p:column sortBy ="#{elem.departureDate}">
+					<f:facet name="header">#{msgs.tablaFechaSalida}</f:facet>#{elem.departureDate}</p:column>
+				<p:column sortBy= "#{elem.destination.city}">
+					<f:facet name="header">#{msgs.tablaDestino1}</f:facet>#{elem.destination.city}</p:column>
+				<p:column sortBy ="#{elem.destination.state}">
+					<f:facet name="header">#{msgs.tablaDestino2}</f:facet>#{elem.destination.state}</p:column>
+				<p:column sortBy ="#{elem.arrivalDate}">
+					<f:facet name="header">#{msgs.tablaFechaLlegada}</f:facet>#{elem.arrivalDate}</p:column>
+				<p:column sortBy ="#{elem.closingDate}">
+					<f:facet name="header">#{msgs.tablaFechaCierre}</f:facet>#{elem.closingDate}</p:column>
+				<p:column sortBy ="#{elem.availablePax}">
+					<f:facet name="header">#{msgs.tablaPlazasDisp}</f:facet>#{elem.availablePax}</p:column>
+				<p:column sortBy="#{elem.estimatedCost}">
+					<f:facet name="header">#{msgs.tablaCoste}</f:facet>#{elem.estimatedCost}</p:column>
+			</p:dataTable>
+		</p:panel>
+		<p:commandButton id="p_volver" value="#{msgs.botonVolver}"
+				action = "volver" update="@all" process="@form">
+		</p:commandButton>
+	</ui:define>
+	<ui:define name="pie">
+	</ui:define>
+</ui:composition>

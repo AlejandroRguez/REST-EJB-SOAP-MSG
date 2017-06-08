@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-public.xhtml">
+
+	<ui:define name="titulo">
+    #{msgs.tituloHead}
+  </ui:define>
+
+	<ui:define name="cuerpo">
+	 	<p:messages id="msjgral" showDetail="true" autoUpdate="true" closable="true"/>
+		<p:panel id="applications" header="#{msgs.solicitudes}">
+			<p:dataTable id="tablaApps" var="elem"
+				value="#{applications.applications}" border="1"
+				emptyMessage="#{msgs.noHaySolicitudes}">
+				<p:column>
+					<f:facet name="header">#{msgs.usuario}</f:facet>#{applications.getNombreByApplication(elem)}</p:column>
+				<p:column>
+					<f:facet name="header">#{msgs.btnAceptar}</f:facet>
+					<p:commandButton id="AppAceptar" value="#{msgs.btnAceptar}"
+						action="#{applications.confirmarPlaza(elem)}" 
+						type = "submit" inmediate = "true" update="@all" >
+					</p:commandButton>
+				</p:column>
+				<p:column>
+					<f:facet name="header">#{msgs.btnRechazar}</f:facet>
+					<p:commandButton id="AppCancelar" value="#{msgs.btnRechazar}"
+						action="#{applications.rechazarSolicitud(elem)}" 
+						type = "submit" inmediate = "true" update = "@all">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+		 
+			<p:panel id="seats" header="#{msgs.plazasConfirmadas}">
+			<p:dataTable id="tablaSeats" var="elem"
+				value="#{applications.seats}" border="1"
+				emptyMessage="#{msgs.noHayPlazasConfirmadas}">
+				<p:column>
+					<f:facet name="header">#{msgs.usuario}</f:facet>#{applications.getNombreBySeat(elem)}</p:column>
+				<p:column sortBy="#{elem.status}">
+					<f:facet name="header">#{msgs.estadoSolicitud}</f:facet>#{elem.status}</p:column>
+				<p:column>
+					<f:facet name="header">#{msgs.aceptarYcancelar}</f:facet>
+					<p:commandLink id="seatCambiar" value="#{msgs.btnCambiar}"
+						action="#{applications.cambiarEstadoSeat(elem)}"
+						type = "submit" inmediate = "true" update = "@all" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+		<p:commandButton id="p_volver" value="#{msgs.botonVolver}"
+				action = "#{viajes.promotor}" update="@all" process="@form">
+		</p:commandButton>
+	</ui:define>
+	<ui:define name="pie">
+	</ui:define>
+</ui:composition>

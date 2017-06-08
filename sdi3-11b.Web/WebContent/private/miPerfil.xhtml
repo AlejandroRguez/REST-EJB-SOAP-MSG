@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-public.xhtml">
+
+	<ui:define name="titulo">
+      #{msgs.tituloHead}
+    </ui:define>
+
+	<ui:define name="cuerpo">
+		<p:panel id="perfilUsuario" header="#{msgs.tituloPerfil}">
+			#{msgs.usuario}: 
+			#{login.user.login}<br/>
+			#{msgs.nombreUsuario} 
+			#{login.user.name}<br/>
+			#{msgs.apellidoUsuario} 
+			#{login.user.surname}<br/>
+			#{msgs.emailUsuario} 
+			#{login.user.email}<br/>
+		</p:panel>
+		<p:commandButton id="p_volver" value="#{msgs.botonVolver}"
+			action="volver" update="@all" process="@form">
+		</p:commandButton>
+	</ui:define>
+
+	<ui:define name="pie">
+	</ui:define>
+
+</ui:composition>
+

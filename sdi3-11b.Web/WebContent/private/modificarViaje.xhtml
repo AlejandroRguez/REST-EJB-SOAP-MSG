@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-public.xhtml">
+
+	<ui:define name="titulo">
+      #{msgs.tituloHead}
+    </ui:define>
+
+	<ui:define name="cuerpo">
+            <p:panel id="datosSalida" header="#{msgs.nuevoViajeSalidaInfo}">
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="#{msgs.direccionSalida}" />
+                    <p:inputText id="direccionSalida" value="#{viaje.departure.address}" required="true"/>
+ 
+                    <h:outputText value="#{msgs.ciudadSalida}" />
+                    <p:inputText id="ciudadSalida" value="#{viaje.departure.city}" required="true"/>
+ 
+                    <h:outputText value="#{msgs.provinciaSalida}" />
+                    <p:inputText id="stateSalida" value="#{viaje.departure.state}" required="true"/>
+ 
+                    <h:outputText value="#{msgs.paisSalida}" />
+                    <p:inputText id="paisSalida" value="#{viaje.departure.country}" required="true"/>
+                    
+                    <h:outputText value="#{msgs.cpSalida}" />
+                    <p:inputText id="codeSalida" value="#{viaje.departure.zipCode}" required="true"/>
+                    
+                    <h:outputText value="#{msgs.fechaSalida}" />
+                    <p:calendar id="fechaSalida" value="#{viaje.departureDate}" pattern="yyyy/MM/dd HH:mm">
+                    </p:calendar>                       
+                </h:panelGrid>
+            </p:panel>
+ 
+            <p:panel id="datosLlegada" header="#{msgs.nuevoViajeLlegadaInfo}">
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="#{msgs.direccionLlegada}" />
+                    <p:inputText id="direccionLlegada" value="#{viaje.destination.address}" required="true"/>
+ 
+                    <h:outputText value="#{msgs.ciudadLlegada}" />
+                    <p:inputText id="ciudadLlegada" value="#{viaje.destination.city}" required="true"/>
+ 
+                    <h:outputText value="#{msgs.provinciaLlegada}" />
+                    <p:inputText id="stateLlegada" value="#{viaje.destination.state}" required="true"/>
+ 
+                    <h:outputText value="#{msgs.paisLlegada}" />
+                    <p:inputText id="paisLlegada" value="#{viaje.destination.country}" required="true"/>
+                    
+                    <h:outputText value="#{msgs.cpLlegada}" />
+                    <p:inputText id="codeLlegada" value="#{viaje.destination.zipCode}" required="true"/>
+                    
+                    <h:outputText value="#{msgs.fechaLlegada}" />
+					<p:calendar id="fechaLlegada" value="#{viaje.arrivalDate}" pattern="yyyy/MM/dd HH:mm">
+                    </p:calendar> 	
+                </h:panelGrid>
+            </p:panel>
+ 
+            <p:panel id="datosAdicionales" header="#{msgs.nuevoViajeOtrosInfo}">
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="#{msgs.fechaCierre}" />
+                    <p:calendar id="fechaCierre" value="#{viaje.closingDate}" pattern="yyyy/MM/dd HH:mm">
+                    </p:calendar> 	
+
+                    <h:outputText value="#{msgs.plazasDisponibles}" />
+                    <p:inputText id="plazasDispoibles" value="#{viaje.plazasDisponibles}" required="true"/>
+ 
+                    <h:outputText value="#{msgs.plazasMaximas}" />
+                    <p:inputText id ="plazasMaximas" value="#{viaje.plazasMaximas}" required="true"/>
+                   
+                    
+                    <h:outputText value="#{msgs.costeEstimado}" />
+                    <p:inputText id="costeEstimado" value="#{viaje.costeEstimado}" required="true"/>
+                </h:panelGrid>
+            </p:panel>
+ 		<p:messages id="msjgral" showDetail="true" autoUpdate="true" closable="true"/>        
+ 		<p:commandButton id="boton" value="#{msgs.botonGuardarCambios}"
+			action="#{viaje.updateTrip}" type = "submit" update="@all" process="@form">
+		</p:commandButton>
+		<p:commandButton id="p_volver" value="#{msgs.botonDescartar}" immediate="true"
+				action = "volver" update="@all" process="@form">
+		</p:commandButton>
+
+	</ui:define>
+
+	<ui:define name="pie">
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messaging-deployment xmlns="urn:jboss:messaging-deployment:1.0">
+	<hornetq-server>
+		<jms-destinations>
+			<jms-queue name="ShareMyTripQueue">
+				<entry name="queue/ShareMyTripQueue" />
+				<entry name="java:jboss/exported/jms/queue/ShareMyTripQueue" />
+				<durable>true</durable>
+			</jms-queue>
+			<jms-queue name="AuditQueue">
+				<entry name="queue/AuditQueue" />
+				<entry name="java:jboss/exported/jms/queue/AuditQueue" />
+				<durable>true</durable>
+			</jms-queue>
+			<jms-topic name="ChatTopic">
+				<entry name="queue/ChatTopic" />
+				<entry name="java:jboss/exported/jms/topic/ChatTopic" />
+			</jms-topic>
+		</jms-destinations>
+	</hornetq-server>
+</messaging-deployment>
